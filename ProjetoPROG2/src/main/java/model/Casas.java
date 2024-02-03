@@ -1,5 +1,7 @@
 package model;
 
+import javax.swing.JOptionPane;
+
 public class Casas {
     
     private String id;
@@ -49,4 +51,19 @@ public class Casas {
         this.area = area;
     }
     
+    public double calcularDensidadeQuartosPorMetroQuadrado() {
+  
+        double numeroQuartosDouble = Double.parseDouble(numeroQuartos);
+        double areaDouble = Double.parseDouble(area);
+
+
+        if (areaDouble == 0) {
+            JOptionPane.showMessageDialog(null, "0");
+        }
+        else{
+            JOptionPane.showMessageDialog(null," A densidade de Quartos dessa casa é :"+numeroQuartosDouble / areaDouble);
+        }  
+        return 0;
+    }
+
 }

@@ -47,7 +47,8 @@ public class MenuController {
 
             if (casaConsultada != null) {
             
-            JOptionPane.showMessageDialog(null,"Endereço: " + casaConsultada.getEndereco()+" Número de Quartos: " + casaConsultada.getNumeroQuartos()+" Área: " + casaConsultada.getArea());
+            JOptionPane.showMessageDialog(null,"\nEndereço: " + casaConsultada.getEndereco()+"\n Número de Quartos: " + casaConsultada.getNumeroQuartos()+"\n Área: " + casaConsultada.getArea());
+            casaConsultada.calcularDensidadeQuartosPorMetroQuadrado();
 
             System.out.println("Casa encontrada!");
             System.out.println("Endereço: " + casaConsultada.getEndereco());
