@@ -5,24 +5,35 @@
 package View;
 
 import Controller.MenuController;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import model.dao.Conexao;
 
-/**
- *
- * @author temis
- */
 public class TelaCasaCadastro extends javax.swing.JFrame {
+    
+    private TelaCasaCadastro telaCasaCadastro;
 
-    /**
-     * Creates new form TelaCasaCadastro
-     */
+
+    Connection conexao = null;
+    
+    PreparedStatement pst = null;
+    
+    ResultSet rs = null;
+    
     public TelaCasaCadastro() {
         initComponents();
+        conexao = Conexao.conector();
+        
     }
+    
+  
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,15 +44,32 @@ public class TelaCasaCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         caixacasacadastro1 = new javax.swing.JTextField();
         caixacasacadastro2 = new javax.swing.JTextField();
         caixacasacadastro3 = new javax.swing.JTextField();
-        Caixacasaid = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        BotaoRegistrarcasa = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        BotaoRegistrarcasa = new javax.swing.JButton();
+        BotaoApagar = new javax.swing.JButton();
+        BotaoConsultar1 = new javax.swing.JButton();
+        Caixacasaid = new javax.swing.JTextField();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -67,14 +95,6 @@ public class TelaCasaCadastro extends javax.swing.JFrame {
         });
         getContentPane().add(caixacasacadastro3, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 228, 141, 44));
 
-        Caixacasaid.setText("ID");
-        Caixacasaid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CaixacasaidActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Caixacasaid, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 11, 85, 45));
-
         jLabel1.setText("endereço");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 112, -1, 29));
 
@@ -84,25 +104,64 @@ public class TelaCasaCadastro extends javax.swing.JFrame {
         jLabel3.setText("metros quadrados");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(53, 228, -1, -1));
 
+        jPanel1.setBackground(new java.awt.Color(204, 0, 153));
+
         BotaoRegistrarcasa.setText("Registrar casa");
         BotaoRegistrarcasa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotaoRegistrarcasaActionPerformed(evt);
             }
         });
-        getContentPane().add(BotaoRegistrarcasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 324, 159, 56));
 
-        jPanel1.setBackground(new java.awt.Color(204, 0, 153));
+        BotaoApagar.setText("Apagar");
+        BotaoApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoApagarActionPerformed(evt);
+            }
+        });
+
+        BotaoConsultar1.setText("Consultar");
+        BotaoConsultar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoConsultar1ActionPerformed(evt);
+            }
+        });
+
+        Caixacasaid.setText("ID");
+        Caixacasaid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CaixacasaidActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Caixacasaid, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(BotaoRegistrarcasa, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BotaoConsultar1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BotaoApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 410, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(Caixacasaid, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(240, 240, 240)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotaoRegistrarcasa, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotaoConsultar1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotaoApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 410));
@@ -142,6 +201,31 @@ public class TelaCasaCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CaixacasaidActionPerformed
 
+    private void BotaoApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoApagarActionPerformed
+    
+    String idCasaParaRemover = Caixacasaid.getText();
+    MenuController menuController = new MenuController();
+
+    try {
+        menuController.removerCasa(idCasaParaRemover);
+    } catch (SQLException ex) {
+        Logger.getLogger(TelaCasaCadastro.class.getName()).log(Level.SEVERE, null, ex);
+    }
+      
+        
+    }//GEN-LAST:event_BotaoApagarActionPerformed
+
+    private void BotaoConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoConsultar1ActionPerformed
+        String idCasaParaConsultar = Caixacasaid.getText();
+        MenuController menuController = new MenuController();
+        try {
+            menuController.consultarCasa(idCasaParaConsultar);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCasaCadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_BotaoConsultar1ActionPerformed
+
     public JTextField getCaixacasaid() {
         return Caixacasaid;
     }
@@ -172,6 +256,10 @@ public class TelaCasaCadastro extends javax.swing.JFrame {
 
     public void setCaixacasacadastro3(JTextField caixacasacadastro3) {
         this.caixacasacadastro3 = caixacasacadastro3;
+    }
+
+    public TelaCasaCadastro(TelaCasaCadastro telaCasaCadastro) {
+        this.telaCasaCadastro = telaCasaCadastro;
     }
 
     
@@ -211,6 +299,8 @@ public class TelaCasaCadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotaoApagar;
+    private javax.swing.JButton BotaoConsultar1;
     private javax.swing.JButton BotaoRegistrarcasa;
     private javax.swing.JTextField Caixacasaid;
     private javax.swing.JTextField caixacasacadastro1;
@@ -220,5 +310,7 @@ public class TelaCasaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

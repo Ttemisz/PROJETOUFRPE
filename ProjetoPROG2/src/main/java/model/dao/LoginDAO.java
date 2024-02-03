@@ -1,7 +1,7 @@
 
 package model.dao;
 
-import View.TelaMenu;
+import View.TelaCasaCadastro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,23 +19,24 @@ public class LoginDAO {
         conexao.close();
     }
     
-   public void login(String email, String senha) throws SQLException {
-    Connection conexao = new Conexao().getConnection();
-    String sql = "SELECT email, senha FROM login WHERE email = ? AND senha = ?";
-    System.out.println("teste login:" + sql);
+    public void login(String email, String senha) throws SQLException {
+        Connection conexao = new Conexao().getConnection();
+        String sql = "SELECT email, senha FROM login WHERE email = ? AND senha = ?";
+        System.out.println("teste login:" + sql);
 
-    PreparedStatement statement = conexao.prepareStatement(sql);
-    statement.setString(1, email);
-    statement.setString(2, senha);
+        PreparedStatement statement = conexao.prepareStatement(sql);
+        statement.setString(1, email);
+        statement.setString(2, senha);
 
-    ResultSet rs = statement.executeQuery();
+        ResultSet rs = statement.executeQuery();
 
-    if (rs.next()) {
-        TelaMenu teladecadastro = new TelaMenu();
-        teladecadastro.setVisible(true);
-    } else {
+        if (rs.next()) {
+            TelaCasaCadastro teladecadastro = new TelaCasaCadastro();
+            teladecadastro.setVisible(true);
+        } else {
+
+        }
         
-    }
 }
     //public void login(String email, String senha) throws SQLException{
         //Connection conexao = new Conexao().getConnection();

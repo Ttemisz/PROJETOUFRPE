@@ -13,7 +13,10 @@ public class Casas {
         this.numeroQuartos = numeroQuartos;
         this.area = area;
     }
-
+    
+    public Casas() {
+    }
+    
     public String getId() {
         return id;
     }
