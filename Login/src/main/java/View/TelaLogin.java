@@ -4,6 +4,14 @@
  */
 package View;
 
+import Controller.LoginController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Temis juninho
@@ -28,12 +36,12 @@ public class TelaLogin extends javax.swing.JFrame {
 
         CaixaUsuario = new javax.swing.JTextField();
         CaixaSenha = new javax.swing.JPasswordField();
+        BotaoCadastrar = new javax.swing.JButton();
         BotaoLogin = new javax.swing.JButton();
-        BotaoPRegistro = new javax.swing.JButton();
         SenhaText = new javax.swing.JLabel();
         UsuarioText = new javax.swing.JLabel();
         TexladeLoginText = new javax.swing.JLabel();
-        ImagemTelaLogin = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -45,8 +53,21 @@ public class TelaLogin extends javax.swing.JFrame {
         });
         getContentPane().add(CaixaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 170, 30));
 
-        CaixaSenha.setText("jPasswordField1");
+        CaixaSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CaixaSenhaActionPerformed(evt);
+            }
+        });
         getContentPane().add(CaixaSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 170, 30));
+
+        BotaoCadastrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BotaoCadastrar.setText("Cadastrar");
+        BotaoCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoCadastrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotaoCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 100, -1));
 
         BotaoLogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotaoLogin.setText("Entrar");
@@ -57,10 +78,6 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(BotaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 100, -1));
-
-        BotaoPRegistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        BotaoPRegistro.setText("Cadastrar");
-        getContentPane().add(BotaoPRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 100, -1));
 
         SenhaText.setFont(new java.awt.Font("Segoe UI Light", 1, 24)); // NOI18N
         SenhaText.setForeground(new java.awt.Color(255, 255, 255));
@@ -77,9 +94,8 @@ public class TelaLogin extends javax.swing.JFrame {
         TexladeLoginText.setText("TELA DE LOGIN");
         getContentPane().add(TexladeLoginText, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 130, 20));
 
-        ImagemTelaLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dados/TheWitcherTelaLogin.jpeg"))); // NOI18N
-        ImagemTelaLogin.setToolTipText("");
-        getContentPane().add(ImagemTelaLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 730, 460));
+        jPanel1.setBackground(new java.awt.Color(0, 204, 255));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 420));
 
         pack();
         setLocationRelativeTo(null);
@@ -90,8 +106,46 @@ public class TelaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_CaixaUsuarioActionPerformed
 
     private void BotaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoLoginActionPerformed
-        // TODO add your handling code here:
+     
+        if (CaixaUsuario.getText().matches("") || CaixaSenha.getText().matches("")) {
+            JOptionPane.showMessageDialog(rootPane, "Todos os campos precisam estar preenchidos");
+    } else {
+    try {
+        LoginController login = new LoginController();
+        login.LoginUsuario(this);
+    } catch (SQLException ex) {
+        Logger.getLogger(TelaLogin.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+        
+        
     }//GEN-LAST:event_BotaoLoginActionPerformed
+
+    private void CaixaSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaixaSenhaActionPerformed
+            
+    }//GEN-LAST:event_CaixaSenhaActionPerformed
+
+    private void BotaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastrarActionPerformed
+        TelaCadastro teladecadastro = new TelaCadastro();
+            teladecadastro.setVisible(true);
+    }//GEN-LAST:event_BotaoCadastrarActionPerformed
+
+    public JPasswordField getCaixaSenha() {
+        return CaixaSenha;
+    }
+
+    public void setCaixaSenha(JPasswordField CaixaSenha) {
+        this.CaixaSenha = CaixaSenha;
+    }
+
+    public JTextField getCaixaUsuario() {
+        return CaixaUsuario;
+    }
+
+    public void setCaixaUsuario(JTextField CaixaUsuario) {
+        this.CaixaUsuario = CaixaUsuario;
+    }
 
     /**
      * @param args the command line arguments
@@ -119,6 +173,9 @@ public class TelaLogin extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -129,13 +186,13 @@ public class TelaLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotaoCadastrar;
     private javax.swing.JButton BotaoLogin;
-    private javax.swing.JButton BotaoPRegistro;
     private javax.swing.JPasswordField CaixaSenha;
     private javax.swing.JTextField CaixaUsuario;
-    private javax.swing.JLabel ImagemTelaLogin;
     private javax.swing.JLabel SenhaText;
     private javax.swing.JLabel TexladeLoginText;
     private javax.swing.JLabel UsuarioText;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

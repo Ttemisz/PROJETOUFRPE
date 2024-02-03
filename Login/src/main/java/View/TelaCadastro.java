@@ -4,6 +4,14 @@
  */
 package View;
 
+import Controller.LoginController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+
 /**
  *
  * @author Temis juninho
@@ -27,27 +35,32 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void initComponents() {
 
         BotaoRegistrar = new javax.swing.JButton();
-        RegistrarUsuario = new javax.swing.JTextField();
+        CaixaRegistrarUsuario = new javax.swing.JTextField();
         CaixaRegistrarSenha = new javax.swing.JTextField();
         CaixaRegistrarEmail = new javax.swing.JTextField();
         UsuarioTextRegistro = new javax.swing.JLabel();
         SenhaTextRegistro = new javax.swing.JLabel();
         EmailTextRegistro = new javax.swing.JLabel();
         RegistroText = new javax.swing.JLabel();
-        TheWitcherTelaRegistro = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BotaoRegistrar.setText("Registrar");
-        getContentPane().add(BotaoRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 90, 30));
-
-        RegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        BotaoRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegistrarUsuarioActionPerformed(evt);
+                BotaoRegistrarActionPerformed(evt);
             }
         });
-        getContentPane().add(RegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 170, 30));
+        getContentPane().add(BotaoRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 90, 30));
+
+        CaixaRegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CaixaRegistrarUsuarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CaixaRegistrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 170, 30));
 
         CaixaRegistrarSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,10 +94,10 @@ public class TelaCadastro extends javax.swing.JFrame {
         RegistroText.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
         RegistroText.setForeground(new java.awt.Color(255, 255, 255));
         RegistroText.setText("REGISTRO");
-        getContentPane().add(RegistroText, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, -1, -1));
+        getContentPane().add(RegistroText, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, -1, -1));
 
-        TheWitcherTelaRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Dados/TheWitcherTelaRegistro.jpeg"))); // NOI18N
-        getContentPane().add(TheWitcherTelaRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(51, 204, 0));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 700, 410));
 
         pack();
         setLocationRelativeTo(null);
@@ -94,14 +107,61 @@ public class TelaCadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CaixaRegistrarSenhaActionPerformed
 
-    private void RegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarUsuarioActionPerformed
+    private void CaixaRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaixaRegistrarUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_RegistrarUsuarioActionPerformed
+    }//GEN-LAST:event_CaixaRegistrarUsuarioActionPerformed
 
     private void CaixaRegistrarEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CaixaRegistrarEmailActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_CaixaRegistrarEmailActionPerformed
 
+    private void BotaoRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoRegistrarActionPerformed
+        
+        if(CaixaRegistrarSenha.getText().matches("")||CaixaRegistrarUsuario.getText().matches("")||CaixaRegistrarEmail.getText().matches("")){
+            JOptionPane.showMessageDialog(rootPane, "Todos os campos precisam estar preenchidos");
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Cadastro Realizado!!!");
+            
+            try {
+            LoginController cadastro = new LoginController();
+            cadastro.cadastroUsuario(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaCadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.setVisible(false);
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_BotaoRegistrarActionPerformed
+
+    public JTextField getCaixaRegistrarEmail() {
+        return CaixaRegistrarEmail;
+    }
+
+    public void setCaixaRegistrarEmail(JTextField CaixaRegistrarEmail) {
+        this.CaixaRegistrarEmail = CaixaRegistrarEmail;
+    }
+
+    public JTextField getCaixaRegistrarSenha() {
+        return CaixaRegistrarSenha;
+    }
+
+    public void setCaixaRegistrarSenha(JTextField CaixaRegistrarSenha) {
+        this.CaixaRegistrarSenha = CaixaRegistrarSenha;
+    }
+
+    public JTextField getCaixaRegistrarUsuario() {
+        return CaixaRegistrarUsuario;
+    }
+
+    public void setCaixaRegistrarUsuario(JTextField CaixaRegistrarUsuario) {
+        this.CaixaRegistrarUsuario = CaixaRegistrarUsuario;
+    }
+
+    
     /**
      * @param args the command line arguments
      */
@@ -141,11 +201,11 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JButton BotaoRegistrar;
     private javax.swing.JTextField CaixaRegistrarEmail;
     private javax.swing.JTextField CaixaRegistrarSenha;
+    private javax.swing.JTextField CaixaRegistrarUsuario;
     private javax.swing.JLabel EmailTextRegistro;
-    private javax.swing.JTextField RegistrarUsuario;
     private javax.swing.JLabel RegistroText;
     private javax.swing.JLabel SenhaTextRegistro;
-    private javax.swing.JLabel TheWitcherTelaRegistro;
     private javax.swing.JLabel UsuarioTextRegistro;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
